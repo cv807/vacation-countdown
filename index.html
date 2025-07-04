@@ -1,0 +1,55 @@
+index.html<!DOCTYPE html>
+<html>
+<head>
+  <title>Vacation Countdown</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding-top: 20%;
+    }
+    h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 6px #000;
+    }
+    #countdown {
+      font-size: 2.5em;
+      margin-top: 20px;
+      text-shadow: 1px 1px 4px #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Family Cruise Countdown</h1>
+  <div id="countdown"></div>
+
+  <script>
+    const departureDate = new Date("2025-07-12T07:00:00").getTime(); // <-- Set your departure date & time
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = departureDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "Bon Voyage!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
